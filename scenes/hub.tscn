@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6gvyxmvny5cg"]
+
+[ext_resource type="Script" path="res://scripts/hub.gd" id="1_asng6"]
+[ext_resource type="FontFile" uid="uid://csglg3nbwvp8m" path="res://assets/fonts/PixelOperator8.ttf" id="1_jt0yh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nrtkw"]
+font = ExtResource("1_jt0yh")
+font_size = 21
+font_color = Color(1, 1, 0.270588, 1)
+
+[node name="Hub" type="CanvasLayer"]
+script = ExtResource("1_asng6")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 6.0
+offset_right = 105.0
+offset_bottom = 29.0
+text = "score: 0"
+label_settings = SubResource("LabelSettings_nrtkw")

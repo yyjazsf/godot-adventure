@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkaf5ed0e5yeb"]
+
+[ext_resource type="Script" path="res://scripts/kill.gd" id="1_tqpxa"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fy3kf"]
+
+[node name="KillZone" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_tqpxa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_fy3kf")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

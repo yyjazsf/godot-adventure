@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://tqli46rn6mgh"]
+
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_g20j2"]
+[ext_resource type="Texture2D" uid="uid://bbw3retq5q2f" path="res://assets/sprites/slime_purple.png" id="2_ug288"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhqki"]
+atlas = ExtResource("2_ug288")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe45g"]
+atlas = ExtResource("2_ug288")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk370"]
+atlas = ExtResource("2_ug288")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exniy"]
+atlas = ExtResource("2_ug288")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hcypc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhqki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fe45g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk370")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exniy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8786"]
+size = Vector2(14, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ciw8v"]
+size = Vector2(16, 16)
+
+[node name="slime" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_g20j2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_hcypc")
+autoplay = "default"
+frame_progress = 0.729584
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_a8786")
+
+[node name="hitBox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ciw8v")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -8)
+target_position = Vector2(10, 0)
+collision_mask = 2
+
+[connection signal="body_entered" from="hitBox" to="." method="_on_hit_box_body_entered"]
